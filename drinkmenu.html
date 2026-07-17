@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>De Supreme Pala Drinks</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#15171f;
+color:white;
+padding-bottom:120px;
+transition:.3s;
+}
+
+.container{
+padding:20px;
+}
+
+.header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:20px;
+}
+
+.header h2{
+font-size:28px;
+font-weight:bold;
+}
+
+.filter-btn{
+background:#f5f1e8;
+border:none;
+padding:12px 20px;
+border-radius:30px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.toggle-card{
+background:#0d0f17;
+border-radius:25px;
+padding:20px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:25px;
+}
+
+.toggle-info{
+display:flex;
+align-items:center;
+gap:15px;
+}
+
+.toggle-info i{
+font-size:50px;
+color:#FFC107;
+}
+
+.toggle-info p{
+color:#4d8eff;
+font-size:14px;
+}
+
+.toggle-info h3{
+font-size:30px;
+}
+
+.switch{
+position:relative;
+display:inline-block;
+width:65px;
+height:35px;
+}
+
+.switch input{
+display:none;
+}
+
+.slider{
+position:absolute;
+top:0;
+left:0;
+right:0;
+bottom:0;
+background:#8BC34A;
+border-radius:50px;
+cursor:pointer;
+}
+
+.slider:before{
+content:"";
+position:absolute;
+height:27px;
+width:27px;
+left:4px;
+bottom:4px;
+background:white;
+border-radius:50%;
+transition:.3s;
+}
+
+input:checked + .slider:before{
+transform:translateX(30px);
+}
+
+.categories{
+display:flex;
+overflow-x:auto;
+gap:15px;
+margin-bottom:25px;
+}
+
+.categories::-webkit-scrollbar{
+display:none;
+}
+
+.category{
+background:#0d0f17;
+padding:12px;
+border-radius:20px;
+min-width:120px;
+text-align:center;
+}
+
+.category img{
+width:80px;
+height:80px;
+border-radius:50%;
+object-fit:cover;
+margin-bottom:10px;
+}
+
+.category span{
+font-size:14px;
+font-weight:bold;
+}
+
+.search-box{
+background:#0d0f17;
+padding:18px;
+border-radius:18px;
+display:flex;
+align-items:center;
+gap:10px;
+margin-bottom:25px;
+}
+
+.search-box input{
+background:none;
+border:none;
+outline:none;
+width:100%;
+font-size:16px;
+color:white;
+}
+
+.section-title{
+font-size:40px;
+margin-bottom:20px;
+}
+
+.products{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+}
+
+.product-card{
+background:#0d0f17;
+padding:15px;
+border-radius:20px;
+position:relative;
+overflow:hidden;
+}
+
+.product-card img{
+width:100%;
+height:180px;
+object-fit:cover;
+border-radius:15px;
+}
+
+.price{
+position:absolute;
+top:15px;
+left:15px;
+background:white;
+color:black;
+padding:8px 12px;
+border-radius:15px;
+font-weight:bold;
+}
+
+.tags{
+display:flex;
+gap:5px;
+margin-top:10px;
+}
+
+.tags span{
+background:black;
+padding:4px 8px;
+border-radius:8px;
+font-size:12px;
+}
+
+.product-card h3{
+margin:15px 0;
+font-size:20px;
+}
+
+.add-btn{
+width:100%;
+padding:15px;
+border:none;
+border-radius:12px;
+background:#28a745;
+color:white;
+font-size:16px;
+cursor:pointer;
+}
+  .cart-btn{
+background:black;
+width:70px;
+height:70px;
+border-radius:50%;
+display:flex;
+justify-content:center;
+align-items:center;
+margin-top:-25px;
+position:relative;
+cursor:pointer;
+}
+
+.badge{
+position:absolute;
+top:0;
+right:0;
+background:red;
+color:white;
+width:25px;
+height:25px;
+border-radius:50%;
+display:flex;
+justify-content:center;
+align-items:center;
+font-weight:bold;
+font-size:12px;
+}
+
+.bottom-nav{
+position:fixed;
+bottom:0;
+left:0;
+width:100%;
+background:#111;
+display:flex;
+justify-content:space-around;
+padding:12px 0;
+z-index:999;
+}
+
+.nav-item{
+display:flex;
+flex-direction:column;
+align-items:center;
+font-size:13px;
+}
+
+.nav-item i{
+font-size:22px;
+margin-bottom:5px;
+}
+  
+
+.floating-phone{
+position:fixed;
+right:20px;
+bottom:160px;
+width:75px;
+height:75px;
+background:white;
+color:black;
+border-radius:20px;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:30px;
+box-shadow:0 5px 20px rgba(0,0,0,.3);
+z-index:999;
+}
+
+.floating-menu{
+position:fixed;
+right:20px;
+bottom:70px;
+width:75px;
+height:75px;
+background:white;
+color:black;
+border-radius:20px;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:30px;
+box-shadow:0 5px 20px rgba(0,0,0,.3);
+z-index:999;
+}
+
+.cart-modal{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.8);
+display:none;
+justify-content:center;
+align-items:center;
+z-index:9999;
+}
+
+.cart-content{
+background:white;
+color:black;
+width:90%;
+max-width:500px;
+padding:20px;
+border-radius:20px;
+max-height:80vh;
+overflow:auto;
+}
+
+.cart-item{
+padding:10px 0;
+border-bottom:1px solid #ddd;
+}
+
+.total{
+font-size:22px;
+font-weight:bold;
+margin-top:15px;
+}
+
+.close-btn{
+margin-top:20px;
+width:100%;
+padding:12px;
+border:none;
+background:black;
+color:white;
+border-radius:10px;
+cursor:pointer;
+}
+
+.light-mode{
+background:#f5f5f5;
+color:black;
+}
+
+.light-mode .toggle-card,
+.light-mode .search-box,
+.light-mode .category,
+.light-mode .product-card{
+background:white;
+color:black;
+}
+
+.light-mode .search-box input{
+color:black;
+}
+  .floating-me{
+position:fixed;
+right:20px;
+bottom:70px;
+width:75px;
+height:75px;
+background:white;
+color:black;
+border-radius:20px;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:30px;
+cursor:pointer;
+box-shadow:0 5px 20px rgba(0,0,0,0.3);
+z-index:1000;
+}
+
+.menu-po{
+position:fixed;
+right:110px;
+bottom:70px;
+width:220px;
+background:white;
+border-radius:15px;
+overflow:hidden;
+display:none;
+box-shadow:0 5px 20px rgba(0,0,0,0.3);
+z-index:1001;
+}
+
+.menu-po a{
+display:block;
+padding:15px;
+text-decoration:none;
+color:black;
+font-weight:bold;
+border-bottom:1px solid #eee;
+}
+
+.menu-po a:hover{
+background:#f5f5f5;
+}
+.light-mode{
+    background:#ffffff;
+    color:#000000;
+}
+
+.light-mode .product-card,
+.light-mode .category,
+.light-mode .search-box,
+.light-mode .toggle-card{
+    background:#f5f5f5;
+    color:#000;
+}
+
+.light-mode .bottom-nav{
+    background:#ffffff;
+    color:#000;
+    border-top:1px solid #ddd;
+}
+  .whatsapp-btn{
+display:block;
+width:100%;
+padding:15px;
+margin-top:15px;
+background:#25D366;
+color:white;
+text-decoration:none;
+text-align:center;
+border-radius:12px;
+font-weight:bold;
+font-size:16px;
+}
+
+.call-btn{
+display:block;
+width:100%;
+padding:15px;
+margin-top:10px;
+background:#007bff;
+color:white;
+text-decoration:none;
+text-align:center;
+border-radius:12px;
+font-weight:bold;
+font-size:16px;
+}
+
+.whatsapp-btn i,
+.call-btn i{
+margin-right:8px;
+}
+.review-modal{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.8);
+justify-content:center;
+align-items:center;
+z-index:9999;
+}
+
+.review-box{
+background:white;
+color:black;
+width:90%;
+max-width:500px;
+max-height:80vh;
+overflow-y:auto;
+padding:25px;
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,0.3);
+}
+
+.review-box h2{
+text-align:center;
+margin-bottom:20px;
+}
+
+.review-item{
+padding:15px;
+margin-bottom:12px;
+background:#f8f8f8;
+border-radius:12px;
+border-left:5px solid #ffc107;
+}
+
+.stars{
+font-size:18px;
+margin-bottom:5px;
+}
+
+.review-item p{
+margin:8px 0;
+line-height:1.5;
+}
+
+.review-item small{
+color:#666;
+font-weight:bold;
+}
+
+.close-review-btn{
+width:100%;
+padding:15px;
+margin-top:15px;
+background:#000;
+color:white;
+border:none;
+border-radius:12px;
+font-size:16px;
+font-weight:bold;
+cursor:pointer;
+transition:.3s;
+}
+
+.close-review-btn:hover{
+opacity:0.85;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="header">
+<h2>De Supreme Palace Drinks</h2>
+</div>
+
+<div class="toggle-card">
+
+<div class="toggle-info">
+<i class="fa-solid fa-sun"></i>
+
+<div>
+<p>Tap to Enable</p>
+<h3>Light Mode</h3>
+</div>
+
+</div>
+
+<label class="switch">
+<input type="checkbox" id="themeToggle">
+<span class="slider"></span>
+</label>
+
+</div>
+
+<div class="categories">
+  
+  <div class="category">
+<img src="https://images.unsplash.com/photo-1579954115545-a95591f28bfc?w=500">
+<span>Milkshake</span>
+</div>
+  
+    <div class="category">
+<img src="https://images.unsplash.com/photo-1560512823-829485b8bf24?w=500">
+<span>Champagne</span>
+</div>
+
+  <div class="category">
+<img src="https://images.unsplash.com/photo-1608270586620-248524c67de9?w=500">
+<span>Beer</span>
+</div>
+  
+<div class="category">
+<img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=500">
+<span> Wine</span>
+</div>
+
+</div>
+
+<h1 class="section-title">
+   Fresh Juice
+</h1>
+
+<div class="products">
+  <div class="product-card">
+
+<div class="price">₦2,000</div>
+
+<img src="https://images.unsplash.com/photo-1623065422902-30a2d299bbe4?w=600">
+
+<div class="tags">
+</div>
+
+<button class="add-btn"
+onclick="addToCart('Fresh Juice',2000)">
+Add To Cart
+</button>
+
+</div>
+
+<div class="product-card">
+
+<div class="price">₦5,000</div>
+
+<img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=600">
+
+<div class="tags">
+
+</div>
+
+<h3> Virgin Mojito</h3>
+
+<button class="add-btn"
+onclick="addToCart('Virgin Mojito',5000)">
+Add To Cart
+</button>
+
+</div>
+
+<div class="product-card">
+
+<div class="price">₦10,000</div>
+
+<img src="https://images.unsplash.com/photo-1622597467836-f3285f2131b8?w=600">
+
+
+<h3>Freshly Squeezed Watermelon Juice </h3> 
+
+<button class="add-btn"
+onclick="addToCart('Freshly Squeezed Watermelon Juice',1000)">
+Add To Cart
+</button>
+
+</div>
+
+</div>
+
+</div>
+  
+
+<!-- WhatsApp Button -->
+
+<a href="https://wa.me/+2347078574532" target="_blank" class="floating-phone">
+<i class="fa-brands fa-whatsapp"></i>
+</a>
+  
+
+<!-- Floating Menu -->
+<div class="floating-me" onclick="toggleMenu()">
+    <i class="fa-solid fa-bars"></i>
+</div>
+
+<div class="menu-po" id="menuPo">
+    <a href="foodmenu.html">🍽 Food Menu</a>
+    <a href="drinkmenu.html">🥤 Drink Menu</a>
+    <a href="feedback.html">⭐ Customer Feedback</a>
+</div>
+
+<!-- Bottom Navigation -->
+
+<div class="bottom-nav">
+
+
+
+<div class="nav-item">
+<i class="fa-solid fa-moon"></i>
+<span>Dark</span>
+</div>
+
+<div class="cart-btn" onclick="showCart()">
+<i class="fa-solid fa-basket-shopping"></i>
+<div class="badge" id="cartCount">0</div>
+</div>
+<div class="nav-item" id="reviewBtn">
+    <i class="fa-solid fa-comment"></i>
+    <span>Review</span>
+</div>
+<div id="reviewModal" class="review-modal">
+
+    <div class="review-box">
+
+        <h2>⭐ Customer Reviews</h2>
+
+        <div class="review-item">
+            <div class="stars">⭐⭐⭐⭐⭐</div>
+            <p>Amazing food and excellent customer service.</p>
+            <small>- John D.</small>
+        </div>
+
+        <div class="review-item">
+            <div class="stars">⭐⭐⭐⭐⭐</div>
+            <p>The seafood platter was absolutely delicious.</p>
+            <small>- Grace M.</small>
+        </div>
+
+        <div class="review-item">
+            <div class="stars">⭐⭐⭐⭐⭐</div>
+            <p>Beautiful environment and quick delivery.</p>
+            <small>- Michael A.</small>
+        </div>
+
+        <div class="review-item">
+            <div class="stars">⭐⭐⭐⭐</div>
+            <p>Great taste and affordable prices.</p>
+            <small>- Sarah K.</small>
+        </div>
+
+        <div class="review-item">
+            <div class="stars">⭐⭐⭐⭐⭐</div>
+            <p>One of the best restaurants I've visited.</p>
+            <small>- David O.</small>
+        </div>
+
+        <button id="closeReview" class="close-review-btn">
+            ✖ Close Reviews
+        </button>
+
+    </div>
+
+</div>
+
+
+
+
+<!-- Cart Modal -->
+
+<div class="cart-modal" id="cartModal">
+
+    <div class="cart-content">
+
+        <h2>My Tray</h2>
+
+        <div id="cartItems"></div>
+
+        <div class="total">
+            Total: ₦<span id="cartTotal">0</span>
+        </div>
+
+        <a href="https://wa.me/+2347078574532" target="_blank" class="whatsapp-btn">
+            <i class="fa-brands fa-whatsapp"></i>
+            Book Via WhatsApp
+        </a>
+
+        <a href="tel:+2348025083945" class="call-btn">
+            <i class="fa-solid fa-phone"></i>
+            Call Now
+        </a>
+
+        <button class="close-btn" onclick="closeCart()">
+            Close
+        </button>
+
+    </div>
+
+</div>
+
+</div>
+
+<script>
+  
+
+
+document.getElementById("reviewBtn")
+.addEventListener("click", function(){
+
+document.getElementById("reviewModal")
+.style.display = "flex";
+
+});
+
+document.getElementById("closeReview")
+.addEventListener("click", function(){
+
+document.getElementById("reviewModal")
+.style.display = "none";
+
+});
+
+
+function openReviews(){
+    document.getElementById("reviewModal").style.display = "flex";
+}
+
+function closeReviews(){
+    document.getElementById("reviewModal").style.display = "none";
+}
+
+
+function toggleMenu(){
+
+const menu =
+document.getElementById("menuPo");
+
+if(menu.style.display === "block"){
+menu.style.display = "none";
+}else{
+menu.style.display = "block";
+}
+
+}
+
+document.addEventListener("click", function(e){
+
+const menu =
+document.getElementById("menuPo");
+
+const button =
+document.querySelector(".floating-me");
+
+if(
+!menu.contains(e.target) &&
+!button.contains(e.target)
+){
+menu.style.display = "none";
+}
+
+});
+
+
+/* Dark Mode */
+
+const toggle =
+document.getElementById('themeToggle');
+
+toggle.addEventListener('change', () => {
+document.body.classList.toggle('light-mode');
+});
+
+/* Cart */
+
+let cart = [];
+
+function addToCart(name, price){
+
+cart.push({
+name:name,
+price:price
+});
+
+document.getElementById("cartCount").innerText =
+cart.length;
+
+alert(name + " added to cart");
+
+}
+
+function showCart(){
+
+let cartItems =
+document.getElementById("cartItems");
+
+cartItems.innerHTML = "";
+
+let total = 0;
+
+cart.forEach(item => {
+
+total += item.price;
+
+cartItems.innerHTML += `
+<div class="cart-item">
+<strong>${item.name}</strong><br>
+₦${item.price.toLocaleString()}
+</div>
+`;
+
+});
+
+document.getElementById("cartTotal").innerText =
+total.toLocaleString();
+
+document.getElementById("cartModal").style.display =
+"flex";
+
+}
+
+function closeCart(){
+
+document.getElementById("cartModal").style.display =
+"none";
+
+}
+
+</script>
+
+</body>
+</html>
