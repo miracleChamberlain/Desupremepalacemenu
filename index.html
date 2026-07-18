@@ -13,13 +13,92 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial, sans-serif;
+    font-family:Arial,sans-serif;
+}
+
+/* LOADER */
+#loader{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100vh;
+    background:#05061a;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+}
+
+.container{
+    width:100%;
+    max-width:420px;
+    text-align:center;
+}
+
+.circle{
+    width:180px;
+    height:180px;
+    margin:auto;
+    border-radius:50%;
+    background:linear-gradient(145deg,#262a52,#11152f);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.hourglass{
+    font-size:70px;
+    color:#ff7b00;
+    animation:spin 2s linear infinite;
+}
+
+@keyframes spin{
+    from{transform:rotate(0deg);}
+    to{transform:rotate(360deg);}
+}
+
+.loading{
+    margin-top:20px;
+}
+
+.loading span{
+    width:12px;
+    height:12px;
+    background:#ff7b00;
+    border-radius:50%;
+    display:inline-block;
+    margin:0 5px;
+    animation:bounce 1.5s infinite;
+}
+
+.loading span:nth-child(2){
+    animation-delay:.2s;
+}
+
+.loading span:nth-child(3){
+    animation-delay:.4s;
+}
+
+@keyframes bounce{
+    0%,100%{
+        transform:translateY(0);
+        opacity:.3;
+    }
+    50%{
+        transform:translateY(-10px);
+        opacity:1;
+    }
+}
+
+/* MAIN PAGE */
+#mainPage{
+    display:none;
 }
 
 body{
     background:#000;
     color:#fff;
-    overflow-x:hidden;
 }
 
 .hero{
@@ -29,24 +108,12 @@ body{
     url('pix1.jpg');
     background-size:cover;
     background-position:center;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
     padding:20px;
-    position:relative;
 }
 
 .top-bar{
-    width:100%;
     display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-.restaurant-name{
-    background:#000;
-    padding:10px 18px;
-    font-size:15px;
+    justify-content:flex-end;
 }
 
 .notification{
@@ -55,62 +122,40 @@ body{
     border:3px solid #fff;
     border-radius:50%;
     display:flex;
-    align-items:center;
     justify-content:center;
-    font-size:22px;
+    align-items:center;
     cursor:pointer;
 }
 
-.logo{
-    margin-top:90px;
+.lo{
     width:220px;
     height:220px;
-    background:#fff;
-    border-radius:30px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
+    margin:60px auto 30px;
     overflow:hidden;
+    border-radius:20px;
 }
 
-.logo img{
-    width:85%;
-}
-
-.welcome{
-    text-align:center;
-    margin-top:30px;
-}
-
-.welcome h1{
-    font-size:70px;
-    font-weight:bold;
-}
-
-.welcome p{
-    font-size:18px;
-    color:#ddd;
-    margin-top:10px;
+.lo img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
 }
 
 .menu-section{
-    width:100%;
     max-width:500px;
-    margin-top:35px;
+    margin:auto;
 }
 
 .menu-btn{
     width:100%;
-    height:85px;
+    height:80px;
     margin-bottom:20px;
     border:2px solid #8a6728;
     border-radius:50px;
-    background:rgba(0,0,0,.45);
+    background:rgba(0,0,0,.4);
     color:#fff;
     font-size:20px;
-    font-weight:bold;
     cursor:pointer;
-    transition:.3s;
 }
 
 .menu-btn:hover{
@@ -118,110 +163,96 @@ body{
 }
 
 .footer-note{
-    margin-top:40px;
     text-align:center;
-    line-height:1.7;
-    font-size:16px;
-    color:#ddd;
-    padding:0 20px;
-}
-
-.footer-note strong{
-    color:#fff;
-}
-
-@media(max-width:600px){
-
-.logo{
-    width:170px;
-    height:170px;
-}
-
-.welcome h1{
-    font-size:50px;
-}
-
-.menu-btn{
-    height:75px;
-    font-size:18px;
-}
-
+    margin-top:30px;
+    font-size:20px;
 }
 
 </style>
 </head>
 <body>
 
+<!-- LOADING SCREEN -->
+<div id="loader">
+
+    <div class="container">
+
+        <div class="circle">
+            <i class="fas fa-hourglass-half hourglass"></i>
+        </div>
+
+        <h1 id="loadingText" style="margin-top:20px;">
+            De Supreme Palace
+        </h1>
+
+        <div class="loading">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- MAIN PAGE -->
+<div id="mainPage">
+
 <section class="hero">
 
-<div class="top-bar">
+    <div class="top-bar">
+        <div class="notification">
+            <i class="fas fa-bell"></i>
+        </div>
+    </div>
 
-<div class="restaurant-name">
+    <div class="lo">
+        <img src="pix1.jpg" alt="Logo">
+    </div>
 
-</div>
+    <div class="menu-section">
 
-<div class="notification">
-<i class="fas fa-bell"></i>
-</div>
+        <button class="menu-btn"
+        onclick="window.location.href='foodmenu.html'">
+        Food Menu
+        </button>
 
-</div>
+        <button class="menu-btn"
+        onclick="window.location.href='drinkmenu.html'">
+        Drinks Menu
+        </button>
 
-<div class="lo">
-<img src="pix1.jpg" width="100%" height="100%">
-</div>
+        <button class="menu-btn"
+        onclick="window.location.href='feedback.html'">
+        Customer Feedback
+        </button>
 
+    </div>
 
-<div class="menu-section">
-
-<button class="menu-btn" onclick="window.location.href='foodmenu.html'">
-Food Menu
-</button>
-
-<button class="menu-btn" onclick="window.location.href='drinkmenu.html'">
-Drinks Menu
-</button>
-
-<button class="menu-btn" onclick="window.location.href='Feedback.html'">
-Customer Feedback
-</button>
-
-</div>
-<div class="footer-note">
-<p>
-
-<strong>De Supreme Palace Restaurant</strong>
-</p>
-
-</div>
+    <div class="footer-note">
+        <strong>De Supreme Palace Restaurant</strong>
+    </div>
 
 </section>
 
+</div>
+
 <script>
 
-function openMenu(menu){
+// Loading text animation
+let dots = 0;
 
-    switch(menu){
+setInterval(() => {
+    dots = (dots + 1) % 4;
+    document.getElementById("loadingText").innerHTML =
+    "De Supreme Palace" + ".".repeat(dots);
+}, 500);
 
-        case "Food Menu":
-            alert("Open Food Menu");
-        break;
-
-        case "Drinks Menu":
-            alert("Open Drinks Menu");
-        break;
-
-        case "Customer Feedback":
-            alert("Open Customer Feedback");
-        break;
-
-        
-    }
-}
-
-document.querySelector('.notification')
-.addEventListener('click',function(){
-    alert('Notifications');
-});
+// Show main page after 4 seconds
+setTimeout(() => {
+    document.getElementById("loader").style.display = "none";
+    document.getElementById("mainPage").style.display = "block";
+}, 4000);
 
 </script>
 
